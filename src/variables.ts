@@ -85,4 +85,10 @@ console.log('names array', names)
 let array:(string | boolean)[] = ['apple',true,'orange']
 console.log('array which is boolean or string', array)
 
+//--------------------------------------------//
+let temperatures:number[] = [20,25,23];
+//temperatures.push('hot');
+let colors:string[] = ['black','white','red','green'];
+// colors.push(true);
 
+let mixedArray:(number|string)[] = [1,'two',3];
