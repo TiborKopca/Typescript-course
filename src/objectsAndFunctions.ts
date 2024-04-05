@@ -169,4 +169,5 @@ function processData(
 }
 console.log(processData(10));
 console.log(processData("Hello"));
-console.log(processData("Hello", { reverse: true }));
+console.log(processData("Hello", { reverse: true })); //OLLEH
+console.log(processData("1234", { reverse: true })); //4321
