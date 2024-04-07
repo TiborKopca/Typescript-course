@@ -312,3 +312,24 @@ if (isManager(employee3)) {
   //this code will run only if the object is of type Manager3
   employee3.delegateTasks();
 }
+
+//INTERFACES-IMPLEMENTS-----------------------------------------------------//
+interface Person4 {
+  name: string;
+  greet(): void;
+}
+
+class Employee4 implements Person4 {
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  greet() {
+    console.log(`Hello, my name is ${this.name}`);
+  }
+}
+
+let john4 = new Employee4('John');
+john4.greet(); // Outputs: Hello, my name is John
