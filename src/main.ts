@@ -5,7 +5,9 @@ import { setupCounter } from './counter.ts'
 // import './variables.ts'
 // import './objectsAndFunctions.ts'
 // import './aliasesAndInterfaces.ts'
-import './tuplesAndEnums.ts'
+// import './tuplesAndEnums.ts'
+import './typeAssertion.ts'
+
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
