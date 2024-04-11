@@ -7,8 +7,9 @@ import { setupCounter } from './counter.ts'
 // import './aliasesAndInterfaces.ts'
 // import './tuplesAndEnums.ts'
 // import './typeAssertion.ts'
-import './actions.ts'
-import './exportImport.ts'
+// import './actions.ts'
+// import './exportImport.ts'
+import './typeguard.ts'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
