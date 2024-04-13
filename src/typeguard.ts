@@ -133,6 +133,7 @@ type User = {
   login: () => void;
 };
 
+//type union
 type Person = Student | User;
 
 const randomPerson = (): Person => {
@@ -140,20 +141,88 @@ const randomPerson = (): Person => {
     ? { name: 'john', study: () => console.log('Studying') }
     : { name: 'mary', login: () => console.log('Logging in') };
 };
-
-const person = randomPerson();
-
-
+//instance
+const person = randomPerson(); //Studying | Loggin in
 
 function isStudent(person: Person): person is Student {
-  // return 'study' in person;
+  // return 'study' in person; //true | false
   return (person as Student).study !== undefined;
 }
 
 // Usage
-
 if (isStudent(person)) {
   person.study(); // This is safe because TypeScript knows that 'person' is a Student.
 } else {
   person.login();
 }
+//type "never" gotcha-----------------------------------------------------------------//
+type Student2 = {
+  name: string;
+  study: () => void;
+};
+
+type User2 = {
+  name: string;
+  login: () => void;
+};
+
+type Person2 = Student2 | User2;
+
+const person2: Person2 = {
+  name: 'anna',
+  study: () => console.log('Studying'),
+  // login: () => console.log('Logging in'),
+};
+// person;
+function isStudent2(person: Person2): person is Student2 {
+  // return 'study' in person;
+  return (person2 as Student2).study !== undefined;
+}
+
+// Usage
+
+if (isStudent2(person2)) {
+  person2.study(); // This is safe because TypeScript knows that 'person' is a Student.
+} else {
+  // in this case person is type "never"
+  console.log(person);
+}
+
+//Discriminated Unions and exhaustive check using the never type--------------------------------------//
+type IncrementAction = {
+  type: 'increment'; //unique literal value, this is how we check for the action
+  amount: number;
+  timestamp: number;
+  user: string;
+};
+
+type DecrementAction = {
+  type: 'decrement'; //unique literal value, this is how we check for the action
+  amount: number;
+  timestamp: number;
+  user: string;
+};
+
+type Action = IncrementAction | DecrementAction;
+
+function reducer(state: number, action: Action): number {
+  //we select action by unique value
+  switch (action.type) {
+    case 'increment':
+      return state + action.amount;
+    case 'decrement':
+      return state - action.amount;
+
+    default:
+      const unexpectedAction: never = action;
+      throw new Error(`Unexpected action: ${unexpectedAction}`);
+  }
+}
+
+const newState = reducer(15, {
+  user: 'john',
+  type: 'decrement',
+  amount: 5,
+  timestamp: 123456,
+});
+console.log(newState) //10 (15-5)
