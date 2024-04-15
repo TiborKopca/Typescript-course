@@ -9,7 +9,8 @@ import { setupCounter } from './counter.ts'
 // import './typeAssertion.ts'
 // import './actions.ts'
 // import './exportImport.ts'
-import './typeguard.ts'
+//import './typeguard.ts'
+import './generics.ts'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
