@@ -159,27 +159,3 @@ const randomStuff: StoreData = {
   data: ["random", 1],
 };
 console.log(randomStuff) //{data: Array(2)}data: ["random", 1]
-
-
-//AXIOS - HTTP REQUESTS
-//data is located in the data property of the object
-// let someUrl = 'https://volando.art'
-// const { data } = axios.get(someUrl);
-
-// axios.get<{ name: string }[]>(someUrl);
-
-// export class Axios {
-//   get<T = any, R = AxiosResponse<T>, D = any>(
-//     url: string,
-//     config?: AxiosRequestConfig<D>
-//   ): Promise<R>;
-// }
-
-// export interface AxiosResponse<T = any, D = any> {
-//   data: T;
-//   status: number;
-//   statusText: string;
-//   headers: RawAxiosResponseHeaders | AxiosResponseHeaders;
-//   config: InternalAxiosRequestConfig<D>;
-//   request?: any;
-// }

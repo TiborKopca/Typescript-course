@@ -10,7 +10,7 @@ import { setupCounter } from './counter.ts'
 // import './actions.ts'
 // import './exportImport.ts'
 //import './typeguard.ts'
-import './generics.ts'
+import './fetchData.ts'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
