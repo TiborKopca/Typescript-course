@@ -106,10 +106,10 @@ const tourSchema = z.object({
   info: z.string(),
   image: z.string(),
   price: z.string(),
-  somethign: z.string(),
+//somethign: z.string(),
 });
 
-// extract the inferred type
+//extract the inferred type(generic)
 type Tour3 = z.infer<typeof tourSchema>;
 
 async function fetchData3(url: string): Promise<Tour3[]> {
@@ -122,14 +122,15 @@ async function fetchData3(url: string): Promise<Tour3[]> {
     }
     //runtime checks
     const rawData: Tour[] = await response.json();
-    const result = tourSchema.array().safeParse(rawData);
-    console.log(result) //{success: false}
+    const result = tourSchema.array().safeParse(rawData);  //safeParse will not trigger an error in catch
+    console.log('All data parsed:',result)       //if there is an unknown property that isnt fetchable from API{success: false}
 
-    //check for arror in result data
+    //check for error in result data - API and Object type doesnt match
     if (!result.success) {
       throw new Error(`Invalid data: ${result.error}`);
     }
     return result.data;
+
   } catch (error) {
     const errMsg =
       error instanceof Error ? error.message : "there was an error...";
@@ -142,7 +143,7 @@ async function fetchData3(url: string): Promise<Tour3[]> {
 
 const tours3 = await fetchData3(url3);
 tours3.map((tour3) => {
-  console.log(tour3.name);
+  console.log(tour3.name); //Best of Paris in 7 Days Tour, etc
 });
 
 //TS DECLARATION FILES---------------------------------------------------------//
