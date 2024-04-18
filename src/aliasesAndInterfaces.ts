@@ -333,3 +333,28 @@ class Employee4 implements Person4 {
 
 let john4 = new Employee4('John');
 john4.greet(); // Outputs: Hello, my name is John
+
+//CLASS IMPLEMENTS INTERFACE-----------------------------------------------------//
+interface IPerson {
+  name: string;
+  age: number;
+  greet(): void;
+}
+
+//Class implements interface
+class Person5 implements IPerson {
+  constructor(public name: string, public age: number) {}
+
+  greet() {
+    console.log(
+      `Hello, my name is ${this.name} and I'm ${this.age} years old.`
+    );
+  }
+}
+
+const hipster = new Person5('shakeAndBake', 100); 
+hipster.greet();  //Hello, my name is shakeAndBake and I'm 100 years old.
+
+
+
+
