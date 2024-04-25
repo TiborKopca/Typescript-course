@@ -37,7 +37,21 @@ type Task = {
   isCompleted: boolean;
 };
 
-const tasks: Task[] = [];
+//task array(without local storage)
+// const tasks: Task[] = [];
+
+//task array + Retrieve tasks from localStorage
+const tasks: Task[] = loadTask();
+//Load data from local storage
+function loadTask():Task[]{
+  const storedTasks = localStorage.getItem('tasks');
+  //to handle null values --> show data or empty array
+  return storedTasks ? JSON.parse(storedTasks) : []
+}
+
+//RENDER EXISTING TASKS (after creating the task array)
+//tasks.forEach((task) => renderTask(task)); //alternative syntax
+tasks.forEach(renderTask);
 
 //CALLBACK GOTCHA - we need to explicitly write what is the type of the EVENT
 // function createTask(event: SubmitEvent) {
@@ -74,8 +88,8 @@ taskForm?.addEventListener("submit", (event) => {
     renderTask(task);
 
     // update local storage
+    updateStorage()
 
-    
     formInput.value = "";
     return;
   }
@@ -91,5 +105,25 @@ function addTask(task: Task): void {
 function renderTask(task: Task): void {
   const taskElement = document.createElement("li");
   taskElement.textContent = task.description;
+
+  //checkbox element
+  const taskCheckbox = document.createElement('input');
+  taskCheckbox.type = 'checkbox';
+  taskCheckbox.checked = task.isCompleted; //retrieves the value from the type object
+
+  //toggle checkbox event listener
+  taskCheckbox.addEventListener('change',() => {
+    task.isCompleted = !task.isCompleted;   //toggle
+    updateStorage();
+  })
+
+  //appending elements to the DOM
+  taskElement.appendChild(taskCheckbox); 
   taskListElement?.appendChild(taskElement);
+}
+
+// Update tasks in localStorage - in the form of array of items
+//we cant store objects in the local storage, only strings
+function updateStorage(): void {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
 }
